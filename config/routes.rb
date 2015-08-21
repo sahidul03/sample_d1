@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
   root 'users#index'
   resources :users
+  resources :categories do
+    resources :products
+  end
 
 
   # Example of regular route:

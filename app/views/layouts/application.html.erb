@@ -19,6 +19,16 @@
       <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
   <% end %>
 </p>
+<% if flash[:notice] %>
+<p>
+  <%= flash[:notice] %>
+</p>
+<% end %>
+<% if flash[:alert] %>
+    <p>
+      <%= flash[:alert] %>
+    </p>
+<% end %>
 <%= yield %>
 
 </body>

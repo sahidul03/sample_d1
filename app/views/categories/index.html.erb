@@ -1,0 +1,14 @@
+<% if @categories.any? %>
+    <% @categories.each do |category| %>
+        <div>
+          <%= link_to category.name , category_path(category) %>
+          <%= link_to 'Edit' , edit_category_path(category) %>
+          <%= link_to 'Delete' , category_path(category) ,method: :delete, data: { confirm: 'Are you sure?' }%>
+        </div>
+    <% end %>
+<% end %>
+
+<br>
+<br>
+<br>
+<%= link_to 'Add New Category', new_category_path %>
