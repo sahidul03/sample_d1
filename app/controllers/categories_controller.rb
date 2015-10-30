@@ -1,4 +1,24 @@
 class CategoriesController < ApplicationController
+  skip_before_action :authenticate_user! , only: [:api_product_no]
+
+  def api_product_no
+    @flag='false'
+    if params[:appId]
+      @category=Category.find(params[:appId]) rescue nil
+      if params[:appSecrete]
+        if @category.app_secrete==params[:appSecrete]
+          @products=@category.products
+          @flag='true'
+        else
+          @message="Wrong appSecrete!"
+        end
+      else
+        @message="appSecrete required!"
+      end
+    else
+      @message="appId required!"
+    end
+  end
 
   def index
    @categories=Category.all

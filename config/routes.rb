@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   root 'users#index'
   resources :users
   resources :categories do
+    collection do
+      get 'api_product_no'
+    end
     resources :products
   end
 
