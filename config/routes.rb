@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :products
   end
 
-
+  resources :charges
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

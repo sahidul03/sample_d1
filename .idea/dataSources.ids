@@ -3,4 +3,7 @@
   <data-source source="LOCAL" name="Rails sample_d1: development" uuid="3c4a1906-f58d-46fd-9738-c54f9a221bc9">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
+  <data-source source="LOCAL" name="Rails sample_d1: test" uuid="9a111e96-bc7e-4b54-b549-17d0e4aca3c2">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>

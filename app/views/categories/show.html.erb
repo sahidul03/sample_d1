@@ -1,11 +1,26 @@
+
 <div class="container_div">
 <h2><%= @category.name %></h2>
 <% if @category.products.any?  %>
     <% @category.products.each do |product| %>
+          <%= form_tag charges_path do %>
+              <article>
+                <label class="amount">
+                  <span>Price: $<%= product.price %></span>
+                </label>
+              </article>
+
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                      data-description="A month's subscription"
+                      data-amount="<%= (product.price)*100 %>"
+                      data-locale="auto"></script>
+          <% end %>
         <div style="margin: 5px; padding: 5px; border: 1px solid #dadada">
          Name: <%= product.name %><br>
-         Price: <%= product.price %> Tk<br>
+         Price: $<span style="color: red" class="price_amount"><%= product.price %></span><br>
          Details:  <%= product.details %><br>
+          <button class="customButton">Purchase</button>
           <%= link_to 'Edit' , edit_category_product_path(@category, product) %>
           <%= link_to 'Delete' , category_product_path(@category, product) ,method: :delete, data: { confirm: 'Are you sure?' }%>
           <%= social_share_button_tag(product.name, :url => 'www.get-togather.com') %>
@@ -39,7 +54,7 @@
             frameDoc.document.open();
             //Create a new HTML document.
             frameDoc.document.write('<html><head><title>Convergent</title>');
-            frameDoc.document.write('</head><body>');
+            frameDoc.document.write('<style type="text/css" >.price_amount{color: red;} </style></head><body>');
             //Append the external CSS file.
             frameDoc.document.write('<link href="style.css" rel="stylesheet" type="text/css" />');
             //Append the DIV contents.
@@ -88,6 +103,7 @@
                                 unit:'px',
                                 format:'a4'
                             });
+//                    img.print()
                     doc.addImage(img, 'JPEG', 20, 20);
                     doc.save('techumber-html-to-pdf.pdf');
                     form.width(cache_width);
@@ -106,4 +122,34 @@
         }());
     })
 
+</script>
+
+<!--<script src="https://checkout.stripe.com/checkout.js"></script>-->
+
+<script>
+//    var handler = StripeCheckout.configure({
+//        key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
+//        image: '/img/documentation/checkout/marketplace.png',
+//        locale: 'auto',
+//        token: function(token) {
+//            // Use the token to create the charge with a server-side script.
+//            // You can access the token ID with `token.id`
+//        }
+//    });
+//
+//    $('.customButton').on('click', function(e) {
+//        // Open Checkout with further options
+//        var price=parseInt($(this).parent().find('.price_amount').text(),10)
+//        handler.open({
+//            name: 'Stripe.com',
+//            description: '2 widgets',
+//            amount: price*100
+//        });
+//        e.preventDefault();
+//    });
+//
+//    // Close Checkout on page navigation
+//    $(window).on('popstate', function() {
+//        handler.close();
+//    });
 </script>
